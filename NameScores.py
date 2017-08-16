@@ -15,4 +15,4 @@ for row in range(len(names)):
 	nameSum=0
 	for char in range(len(name)):
 		nameSum += nameValue(name[char])
-	print name + " " + str(nameSum)
+	print name + " " + str(nameSum) + " " + str(nameSum*(row+1))
