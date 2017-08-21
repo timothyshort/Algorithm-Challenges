@@ -10,6 +10,14 @@ def findPrimeFactor(n):
 			return primeFactor
 	return n
 
+def printPrimeFactorization(factors, n):
+	print "Prime Factorization of " + str(n)
+	for p in range(1,len(factors)):
+		print str(factors[p]),
+		if (p < len(factors)-1):
+			print " x",
+	print
+
 number = 28
 primeFactors = [1]
 
@@ -20,5 +28,6 @@ while (findPrimeFactor(number/prod(primeFactors)) != 1):
 
 elapsed = time.time() - start
 
-print primeFactors
+#print primeFactors
+printPrimeFactorization(primeFactors, number)
 print str(elapsed) + " elapsed time"
