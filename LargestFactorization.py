@@ -1,28 +1,39 @@
 import time
 
+#Calls primeEvens and primeOdds, then Returns maximum prime factor
+def findMaxPrime(n,primes):
+	primes = primeEvens(n,primes)
+	primes = primeOdds(n,primes)
+	return max(primes)
+
 #Find Evens (All Factors of 2)
-def primeEvens(n):
+def primeEvens(n,primes):
 	while (n % 2 == 0):
 		n = n/2
-		printPrime(2)
-	primeOdds(n)
+		primes+= [2]
+	return primes
 
 #Find Odds (All Factors of 3 + 2n)
-def primeOdds(n):
+def primeOdds(n, primes):
 	for p in range(3,n+1,2):
 		while (n % p == 0):
 			n = n/p
-			printPrime(p)
+			primes+= [p]
+	return primes
 
-def printPrime(prime):
-	print str(prime) + " x",
-
-number = 86
+#Initializations
+number = 27
+primeFactors = []
 print "Prime Factorization of " + str(number)
 
+#Execute
 start = time.time()
-primeEvens(number)
+maxPrime = findMaxPrime(number, primeFactors)
 elapsed = time.time() - start
 
-print ""; print "Time elapsed: ",
+#Display Results
+print "Factorization: ",
+print primeFactors
+print "Largest Prime Factor: " + str(maxPrime)
+print "Time elapsed: ",
 print elapsed
