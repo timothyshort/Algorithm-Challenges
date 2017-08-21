@@ -10,7 +10,7 @@ def findPrimeFactor(n):
 			return primeFactor
 	return n
 
-number = 5**12
+number = 28
 primeFactors = [1]
 
 start = time.time()
