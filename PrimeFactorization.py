@@ -18,7 +18,7 @@ def printPrimeFactorization(factors, n):
 			print " x",
 	print
 
-number = 28
+number = 13195
 primeFactors = [1]
 
 start = time.time()
