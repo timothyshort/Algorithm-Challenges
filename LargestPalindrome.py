@@ -46,3 +46,16 @@ elapsed = time.time() - start
 print maxLocation
 print "Time elapsed",
 print elapsed
+
+print "********"
+
+s = time.time()
+print max(a * b for a in range(100, 1000) for b in range(a, 1000) if str(a * b) == str(a * b)[::-1])
+e = time.time() - s
+print e
+
+print "********"
+
+print "My algorithm runs ",
+print e/elapsed,
+print " times faster"
