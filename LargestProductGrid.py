@@ -5,14 +5,29 @@ def maxHorz(data):
 
 	for i in range(len(data)):
 		rowData = [data[i][j]*data[i][j+1]*data[i][j+2]*data[i][j+3] for j in range(0, len(data[0]) - 3)]
-		print "ROW " + str(i) + str(rowData)
+		print "ROW " + str(i+1) + str(rowData)
 	return max(rowData)
 
 def maxVert(data):
 	for j in range(len(data)):
 		rowData = [data[i][j]*data[i+1][j]*data[i+2][j]*data[i+3][j] for i in range(0, len(data[0])-3)]
-		print "COL " + str(j) + str(rowData)
+		print "COL " + str(j+1) + str(rowData)
 	return max(rowData)
+
+def maxLowerDiag(data):
+	#Find each 4-wise downward diagonal in each row
+	for i in range(len(data)-3):
+		rowData = [data[i][j]*data[i+1][j+1]*data[i+2][j+2]*data[i+3][j+3] for j in range(0, len(data[0]) - 3)]
+		print "LOWER DIAG \ " + str(i+1) + str(rowData)
+	return max(rowData)
+
+def maxUpperDiag(data):
+	#Find each 4-wise upward diagonal in each row
+	for i in range(3,len(data)):
+		rowData = [data[i][j]*data[i-1][j+1]*data[i-2][j+2]*data[i-3][j+3] for j in range(0, len(data[0])-3)]
+		print "UPPER DIAG / " + str(i+1) + str(rowData)
+	return max(rowData)
+
 
 
 def getData():
@@ -24,9 +39,14 @@ def getData():
 
 data = getData()
 print data; print ""
+print "ROWS: " + str(len(data))
+print "COLS: " + str(len(data[0]))
+
+print max(maxHorz(data),maxVert(data),maxLowerDiag(data),maxUpperDiag(data))
+"""
 m1 = maxHorz(data)
 m2 = maxVert(data)
-
-print m1
-print m2
-print max(m1,m2)
+m3 = maxLowerDiag(data)
+m4 = maxUpperDiag(data)
+print max(m1,m2,m3,m4)
+"""
