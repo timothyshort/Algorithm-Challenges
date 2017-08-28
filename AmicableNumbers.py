@@ -1,7 +1,6 @@
 import time
 
-
-max = 10000
+max = int(input("Enter maximum number:"))
 sumAmicableNumbers=0
 list = [1] * (max)
 
@@ -20,3 +19,6 @@ print "Sum of Amicable Numbers 1 to " + str(max) + ":"
 print sum(list)
 print "Time Elapsed:"
 print elapsed
+
+n = int(input("Find sum of amicable number: "))
+print list[n-1]
