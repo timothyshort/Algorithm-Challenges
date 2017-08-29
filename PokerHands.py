@@ -1,10 +1,7 @@
-hands = ["5D", "3H", "2H", "2S", "4S"]
-handsNums = [0]*5
-handsSuit = [0]*5
+hands = ["TD", "2D", "AD", "5D", "5D"]
 
 #Convert data to value
 def num_to_value(card):
-	print card,
 	if card == "T" : return 10
 	elif card == "J" : return 11
 	elif card == "Q" : return 12
@@ -12,7 +9,6 @@ def num_to_value(card):
 	elif card == "A" : return 14
 	else: return int(card)
 def suit_to_value(card):
-	print card,
 	if card == "C" : return 1
 	elif card == "S" : return 2
 	elif card == "D" : return 3
@@ -158,25 +154,36 @@ def is_paired(handNums):
 
 #Program Outline
 p1Wins,p2Wins = 0,0
+p1HandsNums, p1HandsSuit = [0]*5, [0]*5
+p2HandsNums, p2HandsSuit = [0]*5, [0]*5
 
 #1 READ THE DATA
+allHands = []
+with open('data/poker-data.txt') as f:
+	for line in f:
+		allHands.append([x for x in line.rstrip('\n').split(" ")])
 
-#2 CONVERT DATA TO READABLE FORMAT
-for i in range(0,5):
-	handsNums[i] = num_to_value(hands[i][0])
-	handsSuit[i] = suit_to_value(hands[i][1])
-print ""
+for hands in allHands:
+	#2 CONVERT DATA TO READABLE FORMAT
+	for i in range(0,5):
+		p1HandsNums[i] = num_to_value(hands[i][0])
+		p1HandsSuit[i] = suit_to_value(hands[i][1])
 
-#3 FIND WINNING HAND
-player1 = max(is_ordered(handsNums,handsSuit), is_paired(handsNums), is_flush(handsSuit))
-player2 = max(is_ordered(handsNums,handsSuit), is_paired(handsNums), is_flush(handsSuit))
+		p2HandsNums[i] = num_to_value(hands[i+5][0])
+		p2HandsSuit[i] = suit_to_value(hands[i+5][1])
 
-#4 COMPARE WINNING HAND
-if player1 > player2:
-	print "PLAYER 1 WINS"
-	p1Wins+=1
-elif player2 > player1 :
-	print "PLAYER 2 WINDS"
-	p2Wins+=1
-else:
+	#3 FIND WINNING HAND
+	player1 = max(0,is_ordered(p1HandsNums,p1HandsSuit), is_paired(p1HandsNums), is_flush(p1HandsSuit))
+	player2 = max(0,is_ordered(p2HandsNums,p2HandsSuit), is_paired(p2HandsNums), is_flush(p2HandsSuit))
+
+	#4 COMPARE WINNING HAND
+	if player1 > player2:
+		print "PLAYER 1 WINS"
+		p1Wins+=1
+	elif player2 > player1 :
+		print "PLAYER 2 WINS"
+		p2Wins+=1
+	else:
+		print "TIE"
+	print "******"
 	#TIE GOES TO HIGHEST CARD
