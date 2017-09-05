@@ -1,9 +1,10 @@
 import time
 
-min, max = 1901, 1901
-days = []
-months = []
+min, max = 1901, 2000
+days, months = [], []
+numOfFirstMonthSundays=0
 
+#Add the index where month begins
 def addMonths(a):
 			months=[0]*(365+a)
 			months[0] = 1
@@ -20,6 +21,8 @@ def addMonths(a):
 			months[333+a] = 1
 			return months
 
+start = time.time()
+
 #Make an array of each day
 for n in range(min,max+1):
 		if (n % 4 == 0):
@@ -27,22 +30,25 @@ for n in range(min,max+1):
 			months+= addMonths(1)
 		else:
 			days+= [0]*365
-			months+= addMonths(1)
+			months+= addMonths(0)
 
-print ""
-print "Days",
-print len(days)
+#Find the whole number of weeks (floor)
 weeks = int (len(days) / 7)
-print "Weeks",
-print weeks
 
+#Sunday is day 7 of the week
+#Using sieve method, make all multiples of 7s equal to 1
 days[6:(weeks*7):7] = [1]*(weeks)
 
-print "Number of Sundays in 20th Century:",
-print sum(days)
+for x in range(len(days)):
+	if months[x] == 1 and days[x] == 1:
+		numOfFirstMonthSundays+=1
 
-sundays=0
-for n in range(min,max+1):
-	sundays+=sum(days[n:n+30])
+elapsed = time.time() - start
 
-print sundays
+print "Days",
+print len(days)
+print "Weeks",
+print weeks
+print "Numer of Sundays that are the first day of the month:",
+print numOfFirstMonthSundays
+print "%s elapsed" %(elapsed)
